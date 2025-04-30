@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .ttm-ptablebox-price-w {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 2px solid red;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.ttm-ptablebox-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+</style>
+<!-- Pricing Section Start -->
+<section class="ttm-row pricing-section ttm-bgcolor-skincolor ttm-bg ttm-bgimage-yes clearfix" style="margin-top: 120px; padding-top: 50px;">
+    <div class="container">
+        <div class="row text-left">
+            <div class="col-lg-9 col-md-9 mx-auto text-center">
+                <div class="section-title clearfix">
+                    <h4>EVENTS PRICING PLAN</h4>
+                    <h2 class="title">Our Pricing Plan</h2>
+                    <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Pricing Section End -->
+<section class="ttm-row pricing-section2 clearfix">
+    <div class="container">
+        <h1 class="text-center mb-4">All Plans</h1>
+        <div class="row d-flex justify-content-center">
+            {% for plan in plans %}
+                <div class="col-md-6 col-lg-3 col-sm-6 mb-4">
+                    <div class="ttm-pricetable-column-inner ttm-currency-before text-center p-3 shadow rounded"
+                         style="border: 1px solid #ddd; background: #fff;">
+                        <h3 class="ttm-ptablebox-title">{{ plan.name }}</h3>
+                        <div class="ttm-ptablebox-price-w d-flex align-items-center justify-content-center mx-auto mt-3"
+                             style="width: 150px; height: 150px; font-size: 28px; border-radius: 50%;">
+                            <div>
+                                <div class="ttm-ptablebox-frequency" style="font-size: 16px;">From</div>
+                                <div class="ttm-ptablebox-price" style="font-size: 28px; font-weight: bold; color: red;">₹{{ plan.price }}</div>
+                            </div>
+                        </div>
+                        <div class="ttm-ptablebox-features mt-3">
+                            <ul class="ttm-feature-lines list-unstyled">
+                                <li>{{ plan.duration }} hrs</li>
+                                <li>Up to {{ plan.max_persons }} Persons</li>
+                                {% for feature in plan.get_features %}
+                                    <li>{{ feature}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% comment %} <a href="{% url 'book_event' %}?event_name={{ plan.name }}" class="btn btn-danger w-100 mt-3">Book Event</a> {% endcomment %}
+                        <a href="{% url 'book_event' %}?plan_id={{ plan.id }}" class="btn btn-danger">Book Event</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

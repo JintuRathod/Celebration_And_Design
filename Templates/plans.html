@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <!-- pricing-section start -->
+  <section class="ttm-row pricing-section ttm-bgcolor-skincolor ttm-bg ttm-bgimage-yes mt_60 res-991-mt-0 clearfix">
+    <div class="container">
+      <div class="row text-left">
+        <div class="col-lg-9 col-md-9">
+          <div class="section-title clearfix">
+            <h4>EVENTS PRICING PLAN</h4>
+            <h2 class="title">Our Pricing Plan</h2>
+            <p>We have different plans for our customer. Pricing decides based on plan selection.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- pricing-section end -->
+
+  <!-- pricing-section2 Form start -->
+  <section class="ttm-row pricing-section2 clearfix">
+    <div class="container" style="max-width: 95%;">
+      <div class="row price-row mt_65" style="display: flex;">
+        {% for plan in plans %}
+          <div class="ttm-pricetable-column-w col-md-6 col-lg-3 col-sm-6 ttm-ptablebox-featured-col">
+            <div class="ttm-pricetable-column-inner ttm-currency-before">
+              <div class="ttm-ptablebox ttm-ptablebox-style-1">
+                <div class="ptable-main">
+                  <h3 class="ttm-ptablebox-title">{{ plan.name }}</h3>
+                  <div class="ttm-ptablebox-price-w" style="width: 150px; height: 150px; font-size: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid red; margin: 10px auto;">
+                    <div>
+                      <div class="ttm-ptablebox-frequency" style="font-size: 16px;">From</div>
+                      <div class="ttm-ptablebox-cur-symbol-before" style="font-size: 20px;"></div>
+                      <div class="ttm-ptablebox-price" style="font-size: 28px; font-weight: bold;">₹{{ plan.price }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ttm-ptablebox-features">
+                  <ul class="ttm-feature-lines">
+                    <li>{{ plan.duration }}</li>
+                    <li>Up to {{ plan.max_persons }} Persons</li>
+                    {% for feature in plan.get_features %}
+                      <li>{{ feature }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <a href="{% url 'book_event' %}?plan_id={{ plan.id }}" class="btn btn-danger">Book Event</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!-- pricing-section2 form end -->
+{% endblock %}

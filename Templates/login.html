@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <br/><br/><br/><br/><br/>
+    <section class="ttm-row contact-form-section2 bg-layer break-991-colum clearfix">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-12">
+                    <div class="padding-12 box-shadow">
+                        <div class="section-title mb-30">
+                            <h3 class="title">Login</h3>
+                        </div>
+                        <form id="contactform" class="row contactform wrap-form clearfix" method="POST" action="{% url 'login' %}" novalidate="novalidate">
+                            {% csrf_token %}
+                            <label class="col-md-6">
+                                <i class="ti ti-email"></i>
+                                <span class="ttm-form-control">
+                                    <input class="text-input" name="email" type="text" value="{{ form.email.value|default_if_none:''}}" placeholder="Your email-id:*" required="required">
+                                </span>
+                            </label>
+                            <label class="col-md-6">
+                                <i class="ti ti-lock"></i>
+                                <span class="ttm-form-control">
+                                    <input class="text-input" name="pass" type="password" value="" placeholder="Password:*" required="required">
+                                </span>
+                            </label>
+                            <input name="submit" type="submit" value="Login Now" class="ttm-btn ttm-btn-size-md ttm-btn-shape-round ttm-btn-style-fill ttm-btn-color-skincolor mt-20" id="submit" title="Login Now">
+                        </form>
+                         <p><a href="{% url 'reset_password' %}">Forgot Password?</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

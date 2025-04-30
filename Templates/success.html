@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body {
+        background: #1a1a1a; /* Dark modern background */
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .success-container {
+        max-width: 600px;
+        margin: 100px auto;
+        padding: 50px;
+        background: rgba(30, 30, 30, 0.9);
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h2 {
+        font-size: 34px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        color: #ff4d4d; /* Highlight color based on theme */
+    }
+
+    p {
+        font-size: 18px;
+        font-weight: 400;
+        margin-bottom: 15px;
+        color: #dcdcdc;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #ff4d4d; /* Highlight color */
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+
+    .button:hover {
+        background: transparent;
+        color: #ff4d4d;
+        border: 2px solid #ff4d4d;
+    }
+
+    .icon {
+        font-size: 80px;
+        color: #ff4d4d;
+        margin-bottom: 20px;
+        animation: popIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+</style>
+
+<div class="success-container">
+    <div class="icon">✔️</div>
+    <h2>Payment Successful</h2>
+    <p>Thank you, <strong>{{ customer_name }}</strong>, for your payment.</p>
+    <p>Event: <strong>{{ event_name }}</strong></p>
+    <p>Total Amount: <strong>Rs. {{ amount|default:"Not Available" }}</strong></p>
+
+    <a href="{% url 'download_receipt' %}?name={{ customer_name }}&event={{ event_name }}&price={{ amount }}"
+       class="button">
+        📜 Download Receipt
+    </a>
+</div>
+
+{% endblock %}

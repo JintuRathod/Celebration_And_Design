@@ -1,0 +1,7 @@
+<h2>Enter New Password</h2>
+<form method="POST">
+    {% csrf_token %}
+    <input type="password" name="new_password" placeholder="New Password" required>
+    <button type="submit">Reset Password</button>
+</form>
+

@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<br/><br/><br/><br/><br/>
+<style>
+    /* Order Summary Box */
+.order-box {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border: 3px solid #ff4d4d;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Title Styling */
+.order-box h3 {
+    color: #ff0000;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Event & Price Styling */
+.order-details p {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #333;
+}
+
+.event-text {
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.price-text {
+    color: #008000;
+    font-weight: bold;
+}
+
+/* Book Now Button */
+.book-now-btn {
+    background: #ff0000;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.4s;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+}
+
+/* Hover Effect */
+.book-now-btn:hover {
+    background: #cc0000;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.5);
+}
+
+/* Order Box Hover Effect */
+.order-box:hover {
+    border-color: #cc0000;
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
+}
+
+    .booking-title {
+    text-align: center;
+    margin-top: -30px; /* Moves it upwards */
+    margin-bottom: 10px;
+}
+
+.booking-heading {
+    font-size: 38px;
+    font-weight: bold;
+    color: #ff0000; /* Red Color */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.event-name {
+    font-size: 28px;
+    font-weight: 600;
+    color: black;
+    margin-top: 5px; /* Adjust space below the heading */
+    text-transform: capitalize;
+}
+
+    .carousel {
+        margin: 20px auto;
+        width: 80%; /* Adjust width as needed */
+        max-width: 900px; /* Maximum size */
+        border-radius: 15px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .slider-img {
+        height: 600px; /* Large Image */
+        object-fit: cover; /* Ensures image fills the space nicely */
+        border-radius: 15px;
+    }
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 10px;
+    }
+</style>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JS (for carousel functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<div class="site-main">
+    <section class="ttm-row checkout-section ttm-bgcolor-grey break-991-colum clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+<!-- Booking Details Title -->
+<div class="text-center booking-title">
+    <h1 class="booking-heading">BOOKING DETAILS</h1>
+    <h2 class="event-name">{{ plan.name }}</h2>
+</div>
+
+                   <!-- Bootstrap Carousel Slider for Images -->
+<div id="planImagesCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for image in plan.images.all %}
+            <button type="button" data-bs-target="#planImagesCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner">
+        {% for image in plan.images.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ image.image.url }}" class="d-block w-100 slider-img" alt="Plan Image">
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Carousel Navigation Buttons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#planImagesCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#planImagesCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+                    <form name="checkout" method="post" class="checkout row box-shadow1" action="{% url 'process_booking' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="event_name" value="{{ plan.name }}">
+                        <input type="hidden" name="event_price" value="{{ plan.price }}">
+                        <div class="col-lg-6">
+                            <div class="billing-fields">
+                                <h3>Billing details</h3>
+                                <p class="checkout-form">
+                                    <label>First name *</label>
+                                    <input type="text" name="billing_first_name" required style="cursor: text;">
+                                </p>
+                                <p class="checkout-form">
+                                    <label>Last name *</label>
+                                    <input type="text" name="billing_last_name" required style="cursor: text;">
+                                </p>
+                                <p class="checkout-form">
+                                    <label>Email *</label>
+                                    <input type="email" name="billing_email" required style="cursor: text;">
+                                </p>
+                                <p class="checkout-form">
+                                    <label>Phone *</label>
+                                    <input type="phone2numeric" name="billing_phone" required maxlength="10" minlength="10" style="cursor: text;">
+                                </p>
+                                <p class="checkout-form">
+    <label>Event Start Date *</label>
+    <input type="date" name="event_start_date" required style="cursor: text;">
+</p>
+<p class="checkout-form">
+    <label>Event End Date *</label>
+    <input type="date" name="event_end_date" required style="cursor: text;">
+</p>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-summary">
+    <div class="billing-fields order-box">
+        <h3>Your Order</h3>
+        <div class="order-details">
+            <p><strong>Event Name:</strong> <span class="event-text">{{ plan.name }}</span></p>
+            <p><strong>Price:</strong> <span class="price-text">Rs. {{ plan.price }}</span></p>
+        </div>
+        <div class="button-container">
+            <button type="button" class="button shape-round book-now-btn" id="place_order">BOOK NOW</button>
+        </div>
+    </div>
+</div>
+
+                    </form>
+                    <p id="discount_notice" style="display: none;">
+                        🎉 Place your second order and get a 10% discount!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- Razorpay Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+document.getElementById('place_order').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const firstName = document.querySelector('input[name="billing_first_name"]').value.trim();
+    const lastName = document.querySelector('input[name="billing_last_name"]').value.trim();
+    const email = document.querySelector('input[name="billing_email"]').value.trim();
+    const phone = document.querySelector('input[name="billing_phone"]').value.trim();
+    const eventName = document.querySelector('input[name="event_name"]').value.trim();
+    const eventStartDate = document.querySelector('input[name="event_start_date"]').value.trim();
+    const eventEndDate = document.querySelector('input[name="event_end_date"]').value.trim();
+    let eventPrice = parseFloat(document.querySelector('input[name="event_price"]').value.trim());
+
+    if (!firstName || !lastName || !email || !phone || !eventName || !eventPrice || !eventStartDate || !eventEndDate) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    fetch("{% url 'process_booking' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: JSON.stringify({
+            billing_first_name: firstName,
+            billing_last_name: lastName,
+            billing_email: email,
+            billing_phone: phone,
+            event_name: eventName,
+            event_price: eventPrice,
+            event_start_date: eventStartDate,
+            event_end_date: eventEndDate
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert("Payment initiation failed: " + data.error);
+            return;
+        }
+
+        if (data.discount_applied) {
+            alert("🎉 Congratulations! You received a 10% discount on your second order!");
+        }
+
+        var options = {
+            "key": data.razorpay_key,
+            "amount": data.amount,
+            "currency": "INR",
+            "name": "Event Booking",
+            "description": "Payment for " + eventName,
+            "order_id": data.order_id,
+            "handler": function (response) {
+                console.log("Payment Successful, Updating Backend...", response);
+
+                fetch("{% url 'process_booking' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_order_id: response.razorpay_order_id
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+        window.location.href = `/success/?name=${firstName}&event=${eventName}&amount=${eventPrice}`;
+ } else {
+                        alert("Payment verification failed!");
+                    }
+                })
+                .catch(error => console.error("Error processing payment:", error));
+            },
+            "prefill": {
+                "name": firstName + " " + lastName,
+                "email": email,
+                "contact": phone
+            },
+            "theme": { "color": "#3399cc" }
+        };
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    })
+    .catch(error => alert("Error processing payment: " + error));
+});
+</script>
+{% endblock %}

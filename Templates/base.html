@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="keywords" content="HTML5 Template" />
+<meta name="keywords" content= "Planwey - Event Planner & Celebrations Management HTML Template, Presentup - Event Planner & Celebrations Management WordPress Theme, themes & template, html5 template, WordPress theme, unlimited colors available, ui/ux, ui/ux design, best html template, html template, html, JavaScript, best css theme,css3, elementor theme, latest premium themes 2023, latest premium templates 2023, Preyan Technosys Pvt.Ltd, cymol themes, themetech mount, Web 3.0, multi-theme, website theme and template, woocommerce, bootstrap template, web templates, responsive theme, services, web design and development, business, anniversary, birthday, conference, decorator, engagement, event agency, event management, event planner, exhibition, expo, festival, seminar, services, speakers, wedding planner, management business">
+<meta name="description" content="Planwey &#8211; Event planner &amp; celebration html Template" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celebrations &amp; Designs - Event planner</title>
+
+<!-- favicon icon -->
+<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+
+<!-- bootstrap -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+
+<!-- animate -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}"/>
+
+<!-- owl-carousel -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.css' %}">
+
+<!-- fontawesome -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}"/>
+
+<!-- themify -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/themify-icons.css' %}"/>
+
+<!-- flaticon -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/flaticon.css' %}"/>
+
+<!-- REVOLUTION LAYERS STYLES -->
+
+<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}">
+
+<!-- prettyphoto -->
+<link rel="stylesheet" type="text/css"
+href="{% static 'css/prettyPhoto.css' %}">
+
+<!-- shortcodes -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/shortcodes.css' %}"/>
+
+<!-- main -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+
+<!-- responsive -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}"/>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchForm = document.querySelector('.ttm-site-searchform');
+            const searchInput = document.querySelector('.searchform-s');
+
+            searchForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent form submission
+
+                const searchQuery = searchInput.value.trim().toLowerCase();
+                const validKeywords = ['wedding', 'corporate', 'party', 'private', 'birthday', 'celebrations'];
+
+                if (validKeywords.some(keyword => searchQuery.includes(keyword))) {
+                    // Redirect to 'plans.html' when a valid keyword is found
+                    window.location.href = '/plans/';
+                } else {
+                    // Alert with a "working" message if the search term does not match any valid keywords
+                    alert("WE ARE WORKING ON THIS EVENT...");
+                    setTimeout(function () {
+                        alert("WE ARE WORKING ON THIS EVENT..."); // Display "Working..." for 5 seconds (this can be adjusted)
+                    }, 5000);
+                }
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <!--page start-->
+    <div class="page">
+
+        <!-- preloader start -->
+        <div id="preloader">
+          <div id="status">&nbsp;</div>
+        </div>
+        <!-- preloader end -->
+
+        <!--header start-->
+        <header id="masthead" class="header ttm-header-style-classic-overlay">
+            <!-- ttm-header-wrap -->
+            <div class="ttm-header-wrap">
+                <!-- ttm-stickable-header-w -->
+                <div id="ttm-stickable-header-w" class="ttm-stickable-header-w clearfix">
+                    <div id="site-header-menu" class="site-header-menu">
+                        <div class="site-header-menu-inner ttm-stickable-header">
+                            <div class="container">
+                                <!-- site-branding -->
+                                <div class="site-branding">
+                                    <a class="home-link" href="/" title="Planwey" rel="home">
+                                        <img id="logo-img" class="img-center" src="{% static 'images/logo-img.png' %}" alt="logo-img">
+                                    </a>
+                                </div><!-- site-branding end -->
+                                <!-- header-icins -->
+                                <div class="ttm-header-icons">
+                                    <div class="ttm-header-icon ttm-header-search-link">
+                                        <a href="#" class="open"><i class="ti ti-search"></i></a>
+                                        <div class="ttm-search-overlay">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <form method="get" class="ttm-site-searchform" action="#">
+                                                        <div class="w-search-form-h">
+                                                            <div class="w-search-form-row">
+                                                                <div class="w-search-input">
+                                                                    <input type="search" class="field searchform-s" name="s" placeholder="Type Word Then Enter...">
+                                                                    <button type="submit">
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <div class="ttm-search-close"><i class="fa fa-close"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- header-icons end -->
+                                <!--site-navigation -->
+                                <div id="site-navigation" class="site-navigation">
+                                    <div class="ttm-menu-toggle">
+                                        <input type="checkbox" id="menu-toggle-form" />
+                                        <label for="menu-toggle-form" class="ttm-menu-toggle-block">
+                                            <span class="toggle-block toggle-blocks-1"></span>
+                                            <span class="toggle-block toggle-blocks-2"></span>
+                                            <span class="toggle-block toggle-blocks-3"></span>
+                                        </label>
+                                    </div>
+                                    <nav id="menu" class="menu">
+                                        <ul class="dropdown">
+                                            <li><a href="/">Home</a></li>
+                                            <li><a href="/events">Events</a></li>
+                                            <li><a href="{% url 'allplan' %}">Our Plans</a></li>
+                                            <li><a href="/contact">Contact Us</a></li>
+        {% if request.session.customer_id %}
+        <li><a href="/logout">Logout</a></li>
+    {% else %}
+        <li><a href="/register">Register</a></li>
+        <li><a href="/login">Login</a></li>
+    {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div><!-- site-navigation end-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--ttm-header-wrap end -->
+            </header>
+            <!--header end-->
+
+          {% block body %}
+<body>
+    {% block content %}
+    {% endblock %}
+</body>
+
+          {% endblock %}
+
+        <!--footer-->
+        <footer class="footer widget-footer bg-img11 ttm-bgcolor-black ttm-bg ttm-bgimage-yes clearfix">
+            <div class="ttm-row-wrapper-bg-layer ttm-bg-layer"></div>
+            <div class="first-footer ttm-textcolor-white">
+                <div class="container">
+                       <div class="row">
+                        <div class="widget-area col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <aside class="widget widget-text">
+                                <div class="ttm-newstter-box">
+                                    <h4>Subscribe to <span class="ttm-textcolor-skincolor">Our Newsletter</span></h4>
+                                    <p>No spam message from us, only give you latest offer which is best for you and your business</p>
+                                    <form class="mc4wp-form mc4wp-form-24" method="get" data-id="24" data-name="Newsletter Form">
+                                        <div class="mc4wp-form-fields">
+                                            <div class="mailchimp-inputbox">
+                                                <input type="email" name="EMAIL" placeholder="Your email address.." required="">
+                                                <input type="submit" value="Subscribe Now">
+                                            </div>
+                                        </div>
+                                        <div class="mc4wp-response"></div>
+                                    </form>
+                                </div>
+                            </aside>
+                        </div>
+                    </div><!-- row end -->
+                </div>
+            </div>
+            <div class="bottom-footer-text">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 text-center">
+                            <div class="ttm-social-link-wrapper">
+                                <ul class="social-icons">
+                                    <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                            <P>Copyright © 2024 Celebrations & Designs. All rights reserved.</P>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--footer-END-->
+
+</div><!-- page end -->
+
+    <!--back-to-top start-->
+    <a id="totop" href="#top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <!--back-to-top end-->
+
+    <!-- Javascript -->
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.js' %}"></script>
+    <script src="{% static 'js/jquery-waypoints.js' %}"></script>
+    <script src="{% static 'js/jquery-validate.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'js/numinate.min6959.js?ver=4.9.3' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+    <!-- Revolution Slider -->
+    <script src="{% static 'revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+    <script src="{% static 'revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+    <script src="{% static 'revolution/js/slider.js' %}"></script>
+
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+
+    <script src="{% static 'revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+    <script src="{% static 'revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+    <script src="{% static 'revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+    <script src="{% static 'revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+    <script src="{% static 'revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+    <script src="{% static 'revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+    <script src="{% static 'revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+    <script src="{% static 'revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+
+
+</body>
+</html>
+
+
+<!-- First name last name email phone event  -->
+<!-- id customer_id event_id amount payment date payment_status-->
