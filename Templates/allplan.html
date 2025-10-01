@@ -62,12 +62,11 @@
                                 <li>{{ plan.duration }} hrs</li>
                                 <li>Up to {{ plan.max_persons }} Persons</li>
                                 {% for feature in plan.get_features %}
-                                    <li>{{ feature}}</li>
+                                    <li>{{ feature }}</li>
                                 {% endfor %}
                             </ul>
                         </div>
-                        {% comment %} <a href="{% url 'book_event' %}?event_name={{ plan.name }}" class="btn btn-danger w-100 mt-3">Book Event</a> {% endcomment %}
-                        <a href="{% url 'book_event' %}?plan_id={{ plan.id }}" class="btn btn-danger">Book Event</a>
+                        <a href="{% url 'book_event' %}?event_name={{ plan.name }}" class="btn btn-danger w-100 mt-3">Book Event</a>
                     </div>
                 </div>
             {% endfor %}

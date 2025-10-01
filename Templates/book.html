@@ -3,7 +3,7 @@
 {% block body %}
 <br/><br/><br/><br/><br/>
 <style>
-    /* Order Summary Box */
+/* Order Summary Box */
 .order-box {
     background: #fff;
     padding: 25px;
@@ -71,16 +71,16 @@
     box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
 }
 
-    .booking-title {
+.booking-title {
     text-align: center;
-    margin-top: -30px; /* Moves it upwards */
+    margin-top: -30px;
     margin-bottom: 10px;
 }
 
 .booking-heading {
     font-size: 38px;
     font-weight: bold;
-    color: #ff0000; /* Red Color */
+    color: #ff0000;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -90,80 +90,82 @@
     font-size: 28px;
     font-weight: 600;
     color: black;
-    margin-top: 5px; /* Adjust space below the heading */
+    margin-top: 5px;
     text-transform: capitalize;
 }
 
-    .carousel {
-        margin: 20px auto;
-        width: 80%; /* Adjust width as needed */
-        max-width: 900px; /* Maximum size */
-        border-radius: 15px;
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-    }
+.carousel {
+    margin: 20px auto;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
 
-    .slider-img {
-        height: 600px; /* Large Image */
-        object-fit: cover; /* Ensures image fills the space nicely */
-        border-radius: 15px;
-    }
+.slider-img {
+    height: 600px;
+    object-fit: cover;
+    border-radius: 15px;
+}
 
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 50%;
-        padding: 10px;
-    }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 10px;
+}
 </style>
+
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap JS (for carousel functionality) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
 <div class="site-main">
     <section class="ttm-row checkout-section ttm-bgcolor-grey break-991-colum clearfix">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-<!-- Booking Details Title -->
-<div class="text-center booking-title">
-    <h1 class="booking-heading">BOOKING DETAILS</h1>
-    <h2 class="event-name">{{ plan.name }}</h2>
-</div>
+                    <!-- Booking Details Title -->
+                    <div class="text-center booking-title">
+                        <h1 class="booking-heading">BOOKING DETAILS</h1>
+                        <h2 class="event-name">{{ plan.name }}</h2>
+                    </div>
 
-                   <!-- Bootstrap Carousel Slider for Images -->
-<div id="planImagesCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        {% for image in plan.images.all %}
-            <button type="button" data-bs-target="#planImagesCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></button>
-        {% endfor %}
-    </div>
+                    <!-- Bootstrap Carousel Slider for Images -->
+                    <div id="planImagesCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            {% for image in plan.images.all %}
+                                <button type="button" data-bs-target="#planImagesCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></button>
+                            {% endfor %}
+                        </div>
 
-    <div class="carousel-inner">
-        {% for image in plan.images.all %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ image.image.url }}" class="d-block w-100 slider-img" alt="Plan Image">
-            </div>
-        {% endfor %}
-    </div>
+                        <div class="carousel-inner">
+                            {% for image in plan.images.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ image.image.url }}" class="d-block w-100 slider-img" alt="Plan Image">
+                                </div>
+                            {% endfor %}
+                        </div>
 
-    <!-- Carousel Navigation Buttons -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#planImagesCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#planImagesCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
+                        <!-- Carousel Navigation Buttons -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#planImagesCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#planImagesCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
 
                     <form name="checkout" method="post" class="checkout row box-shadow1" action="{% url 'process_booking' %}">
                         {% csrf_token %}
                         <input type="hidden" name="event_name" value="{{ plan.name }}">
                         <input type="hidden" name="event_price" value="{{ plan.price }}">
+
                         <div class="col-lg-6">
                             <div class="billing-fields">
                                 <h3>Billing details</h3>
@@ -183,31 +185,33 @@
                                     <label>Phone *</label>
                                     <input type="tel" name="billing_phone" required maxlength="10" minlength="10" style="cursor: text;">
                                 </p>
-                                <p class="checkout-form">
-    <label>Event Start Date *</label>
-    <input type="date" name="event_start_date" required style="cursor: text;">
-</p>
-<p class="checkout-form">
-    <label>Event End Date *</label>
-    <input type="date" name="event_end_date" required style="cursor: text;">
-</p>
 
+                                <p class="checkout-form">
+                                    <label>Event Start Date *</label>
+                                    <input type="date" name="event_start_date" id="event_start_date" required style="cursor: text;">
+                                </p>
+
+                                <p class="checkout-form">
+                                    <label>Event End Date *</label>
+                                    <input type="date" name="event_end_date" id="event_end_date" required style="cursor: text;">
+                                </p>
                             </div>
                         </div>
-                        <div class="col-lg-6 order-summary">
-    <div class="billing-fields order-box">
-        <h3>Your Order</h3>
-        <div class="order-details">
-            <p><strong>Event Name:</strong> <span class="event-text">{{ plan.name }}</span></p>
-            <p><strong>Price:</strong> <span class="price-text">Rs. {{ plan.price }}</span></p>
-        </div>
-        <div class="button-container">
-            <button type="button" class="button shape-round book-now-btn" id="place_order">BOOK NOW</button>
-        </div>
-    </div>
-</div>
 
+                        <div class="col-lg-6 order-summary">
+                            <div class="billing-fields order-box">
+                                <h3>Your Order</h3>
+                                <div class="order-details">
+                                    <p><strong>Event Name:</strong> <span class="event-text">{{ plan.name }}</span></p>
+                                    <p><strong>Price:</strong> <span class="price-text">Rs. {{ plan.price }}</span></p>
+                                </div>
+                                <div class="button-container">
+                                    <button type="button" class="button shape-round book-now-btn" id="place_order">BOOK NOW</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
+
                     <p id="discount_notice" style="display: none;">
                         🎉 Place your second order and get a 10% discount!
                     </p>
@@ -217,9 +221,38 @@
     </section>
 </div>
 
-
 <!-- Razorpay Script -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- Date logic -->
+<script>
+const startInput = document.getElementById('event_start_date');
+const endInput = document.getElementById('event_end_date');
+
+// Set min for start date = tomorrow
+const today = new Date();
+today.setDate(today.getDate() + 1);
+const tomorrowStr = today.toISOString().split('T')[0];
+startInput.setAttribute('min', tomorrowStr);
+startInput.value = tomorrowStr;
+
+// Set max for start date = today + 1 month
+const maxStart = new Date();
+maxStart.setMonth(maxStart.getMonth() + 1);
+startInput.setAttribute('max', maxStart.toISOString().split('T')[0]);
+
+// End date must be >= start date
+startInput.addEventListener('change', () => {
+    const startDate = new Date(startInput.value);
+    endInput.setAttribute('min', startInput.value);
+
+    if (endInput.value < startInput.value) {
+        endInput.value = startInput.value;
+    }
+});
+</script>
+
+<!-- Booking & Razorpay script (unchanged) -->
 <script>
 document.getElementById('place_order').addEventListener('click', function (e) {
     e.preventDefault();
@@ -274,8 +307,6 @@ document.getElementById('place_order').addEventListener('click', function (e) {
             "description": "Payment for " + eventName,
             "order_id": data.order_id,
             "handler": function (response) {
-                console.log("Payment Successful, Updating Backend...", response);
-
                 fetch("{% url 'process_booking' %}", {
                     method: "POST",
                     headers: {
@@ -290,8 +321,8 @@ document.getElementById('place_order').addEventListener('click', function (e) {
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
-        window.location.href = `/success/?name=${firstName}&event=${eventName}&amount=${eventPrice}`;
- } else {
+                        window.location.href = `/success/?name=${firstName}&event=${eventName}&amount=${eventPrice}`;
+                    } else {
                         alert("Payment verification failed!");
                     }
                 })
@@ -311,4 +342,5 @@ document.getElementById('place_order').addEventListener('click', function (e) {
     .catch(error => alert("Error processing payment: " + error));
 });
 </script>
+
 {% endblock %}
